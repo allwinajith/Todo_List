@@ -1,0 +1,71 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+.appContainer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.headerContainer {
+  height: 60px;
+  width: 100%;
+  max-width: 1000px;
+  background-color: #f1ece6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 1rem; */
+}
+
+.mainContentContainer {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(241, 236, 230, 0.8), 0 2px 4px rgba(0, 0, 0, 0.05);
+  /* border: 1px solid; */
+  box-sizing: border-box;
+}
+
+.contentToggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #f3f3f3;
+  height: 45px;
+  cursor: pointer;
+}
+
+.todoContent {
+  padding: 1rem;
+}
+
+.professionalContainer,
+.personalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.toggleLine {
+  max-width: 34vw;
+  border: 1px solid #d98326;
+}
+
+.personalContainer div {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.professionalContainer div {
+  font-size: 1.3em;
+}
