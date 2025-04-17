@@ -53,19 +53,21 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+  height: 45px;
   gap: 10px;
-}
-
-.toggleLine {
-  max-width: 34vw;
-  border: 1px solid #d98326;
-}
-
-.personalContainer div {
   font-size: 1.3em;
+  transition: background-color 0.3s ease;
+}
+
+.personalContainer:hover,
+.professionalContainer:hover {
+  background-color: #e0e0e0;
+}
+
+.personalContainer.active,
+.professionalContainer.active {
+  transition: ease-in;
   font-weight: bold;
-}
-
-.professionalContainer div {
-  font-size: 1.3em;
+  border-bottom: 3px solid #d98326;
 }

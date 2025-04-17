@@ -1,31 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
+import "../src/App.css";
 import { FaPersonShelter } from "react-icons/fa6";
 import { PiBuildingOfficeBold } from "react-icons/pi";
 
 const MainContent = () => {
+  const [activeLink, setActiveLink] = useState("Personal");
+  const [personalToDo, setPersonalToDo] = useState(
+    "This is the TODO Content for the personal container"
+  );
+  const [professsionalToDo, setProfessoionalToDo] = useState(
+    "This is the TODO content for the Professional container "
+  );
+
   return (
     <div className="mainContentContainer">
       <div className="contentToggleBtn">
-        <div className="personalContainer">
+        <div
+          onClick={() => setActiveLink("Personal")}
+          className={`personalContainer ${
+            activeLink == "Personal" ? "active" : ""
+          } `}
+        >
           <FaPersonShelter />
           <div>Personal</div>
         </div>
-        <div className="professionalContainer">
+        <div
+          onClick={() => setActiveLink("Professional")}
+          className={`professionalContainer ${
+            activeLink == "Professional" ? "active" : ""
+          } `}
+        >
           <PiBuildingOfficeBold />
           <div>Professional</div>
         </div>
       </div>
-      <div className="toggleLine"></div>
       <div className="todoContent">
-        <h1>This is the Container for Main</h1>
-        <p>
-          This is the thing I make a
-          adsfffffffffffffadsfffffffffffffffffffffffffffffffffffffffffffffffffff
-          Great question! Since you already have components named Header and
-          Footer, your content area typically represents the main body of your
-          page. Here are some good naming options depending on how you want to
-          structure it:
-        </p>
+        {activeLink == "Personal" ? personalToDo : professsionalToDo}
       </div>
     </div>
   );
