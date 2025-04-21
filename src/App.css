@@ -2,11 +2,15 @@ body,
 html {
   padding: 0;
   margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .appContainer {
   min-height: 100vh;
   width: 100%;
+  min-width: 410px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,10 +33,20 @@ html {
   flex: 1;
   width: 100%;
   max-width: 1000px;
+  display: flex;
   background-color: #ffffff;
+  flex-direction: column;
   box-shadow: 0 4px 12px rgba(241, 236, 230, 0.8), 0 2px 4px rgba(0, 0, 0, 0.05);
   /* border: 1px solid; */
   box-sizing: border-box;
+}
+
+.displayTodoContainer {
+  flex: 1;
+  /* background-color: #4a90e2; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .contentToggleBtn {
@@ -42,10 +56,6 @@ html {
   background-color: #f3f3f3;
   height: 45px;
   cursor: pointer;
-}
-
-.todoContent {
-  padding: 1rem;
 }
 
 .professionalContainer,
@@ -70,4 +80,159 @@ html {
   transition: ease-in;
   font-weight: bold;
   border-bottom: 3px solid #d98326;
+}
+
+.todoContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+}
+
+.addItemBox {
+  display: flex;
+  align-items: center;
+  width: inherit;
+}
+.dataBox {
+  margin-top: 20px;
+  width: 40vw;
+  min-width: 300px;
+  padding: 20px;
+  height: 480px;
+  border-radius: 20px;
+  background-color: #f1ece6;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollableContent {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px; /* Space for the button */
+}
+
+.clearContainer {
+  display: flex;
+  align-items: center;
+  color: rgb(225 127 21);
+  gap: 3px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 5px 12px;
+  background: none;
+  align-self: flex-end;
+  margin-top: 5px;
+  background-color: #f1ece6;
+}
+
+/* .clearContainer:hover {}
+  padding-bottom: 5px;
+} */
+
+input[type="text"] {
+  font-family: inherit;
+  height: 42px;
+  width: 35vw;
+  min-width: 200px;
+  border: 1px solid #ccc;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-right: none;
+  padding: 5px 15px;
+  font-size: 14px;
+  outline: none;
+  background: #f1ece6;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border-color: #4a90e2;
+}
+
+input[type="button"] {
+  font-family: inherit;
+  height: 42px;
+  width: 80px;
+  box-sizing: border-box;
+  border: 1px solid #4a90e2;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 5px;
+  background-color: #4791e8bd;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="button"]:hover {
+  background-color: #3a7bc8;
+}
+
+.dataList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f2d8bd;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.todoItem:hover {
+  background-color: #f9f5f0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todoCheckbox {
+  margin-right: 12px;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  /* accent-color: #d98326; */
+  cursor: pointer;
+}
+
+.taskText {
+  flex-grow: 1;
+  font-size: 14px;
+  color: #333;
+  padding: 2px 0;
+}
+
+.todoItem.done .taskText {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.deleteIcon {
+  font-size: 23px;
+  color: #d98326;
+  transition: all 0.2s ease;
+  padding: 2px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.deleteIcon:hover {
+  color: #c0392b;
+  /* background-color: #f2d8bd; */
+  cursor: pointer;
+  transform: scale(1.1);
 }
