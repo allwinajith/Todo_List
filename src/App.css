@@ -129,11 +129,14 @@ html {
   align-self: flex-end;
   margin-top: 5px;
   background-color: #f1ece6;
+  transition: all 0.2s ease;
 }
 
-/* .clearContainer:hover {}
-  padding-bottom: 5px;
-} */
+.clearContainer:hover {
+  background-color: #e0d5c8;
+  color: rgb(200, 100, 10);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 input[type="text"] {
   font-family: inherit;
@@ -232,7 +235,24 @@ input[type="button"]:hover {
 
 .deleteIcon:hover {
   color: #c0392b;
-  /* background-color: #f2d8bd; */
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.defaultText {
+  text-align: center;
+  margin-top: 30px;
+  color: #c17067;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }

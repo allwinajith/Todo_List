@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../src/App.css";
 import { FaPersonShelter } from "react-icons/fa6";
 import { PiBuildingOfficeBold } from "react-icons/pi";
@@ -8,17 +8,14 @@ import { MdDelete } from "react-icons/md";
 const MainContent = () => {
   const [activeLink, setActiveLink] = useState("personal");
   const [inputValue, setInputValue] = useState("");
-  const [todoData, setTodoData] = useState({
-    personal: [
-      {
-        id: 1,
-        task: "This is the sample task ",
-        isCompleted: false,
-      },
-    ],
-    professional: [
-      { id: 1, task: "This is the sample task", isCompleted: true },
-    ],
+  const [todoData, setTodoData] = useState(() => {
+    const savedData = localStorage.getItem("todoData");
+    return savedData
+      ? JSON.parse(savedData)
+      : {
+          personal: [],
+          professional: [],
+        };
   });
 
   const handleAddData = () => {
@@ -36,10 +33,43 @@ const MainContent = () => {
   };
 
   const handleKeyAdd = (e) => {
-    if (e.key === 'Enter'){
+    if (e.key === "Enter") {
       handleAddData();
     }
   };
+
+  const handleCheck = (id) => {
+    setTodoData((prev) => ({
+      ...prev,
+      [activeLink]: prev[activeLink].map((item) =>
+        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+      ),
+    }));
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      setTodoData((prev) => ({
+        ...prev,
+        [activeLink]: prev[activeLink].filter((item) => item.id !== id),
+      }));
+    }
+    // localStorage.setItem("todoData", JSON.stringify(newData));
+    // return newData;
+  };
+
+  const handleClearCompleted = () => {
+    if (window.confirm("Are you sure you want to clear all completed tasks?")) {
+      setTodoData((prev) => ({
+        ...prev,
+        [activeLink]: prev[activeLink].filter((item) => !item.isCompleted),
+      }));
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("todoData", JSON.stringify(todoData));
+  }, [todoData]);
 
   return (
     <div className="mainContentContainer">
@@ -78,9 +108,21 @@ const MainContent = () => {
           </div>
           <div className="dataBox">
             <div className="scrollableContent">
-              <DisplayData data={todoData[activeLink]} />
+              {todoData[activeLink].length != 0 ? (
+                <DisplayData
+                  toggleCheck={handleCheck}
+                  data={todoData[activeLink]}
+                  handleDel={handleDelete}
+                />
+              ) : (
+                <div className="defaultText"> Please Add Some Task </div>
+              )}
             </div>
-            <button className="clearContainer">
+            <button
+              className="clearContainer"
+              onClick={handleClearCompleted}
+              disabled={!todoData[activeLink].some((item) => item.isCompleted)}
+            >
               <VscClearAll color="rgb(225 127 21)" fontSize={20} />
               <span>Clear Completed</span>
             </button>
@@ -91,19 +133,19 @@ const MainContent = () => {
   );
 };
 
-const DisplayData = ({ data }) => {
+const DisplayData = ({ data, toggleCheck, handleDel }) => {
   return (
     <ul className="dataList">
       {data.map((item, ind) => (
         <li key={ind} className={`todoItem ${item.isCompleted ? "done" : ""}`}>
           <input
             type="checkbox"
-            onClick={(prev)=>item.isCompleted = !prev}
-            defaultChecked={item.isCompleted}
+            onChange={() => toggleCheck(item.id)}
+            checked={item.isCompleted}
             className="todoCheckbox"
           />
           <span className="taskText">{item.task}</span>
-          <MdDelete className="deleteIcon" />
+          <MdDelete onClick={() => handleDel(item.id)} className="deleteIcon" />
         </li>
       ))}
     </ul>
